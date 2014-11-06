@@ -61,9 +61,9 @@ def GetPos(rssi, pos, accuracy, method):
         #return stats.nanmedian(pos)
             return np.median(pos,axis=0)
         elif method.endswith('2'):  # Simple mean
-            return np.nanmean(pos,axis=0)
+            return np.mean(pos,axis=0)
         elif method.endswith('3'):  # Weighted mean
-            weight = np.exp(rssi / 10.0) / accuracy
+            weight = np.exp(np.array(rssi) / 10.0) / np.array(accuracy)
             return np.average(pos, 0, weight)
     elif method.startswith('B'):
         nMeasurements = len(rssi)
